@@ -1,0 +1,76 @@
+---
+title: Laguerre Polynomials
+output: pdf_document
+---
+
+```{R setup, include = FALSE}
+knitr::opts_chunk$set(comment = NA, prompt = TRUE)
+```
+
+
+$$\begin{aligned}
+(n+1)L_{n+1}(t) = (2n+1-t)L_n(t)-nL_{n-1}(t).
+	\end{aligned}$$
+$$\begin{aligned}
+&L_0(t) = 1\\
+&L_1(t) = -t+1\\
+&L_2(t) = 2^{-1}(t^2-4t+2)\\
+&L_3(t) = 6^{-1}(-t^3 +9t^2 - 18t + 6)\\
+&L_4(t) = 24^{-1}(t^4-16t^3+72t^2-96t+24)\\
+&L_5(t) = 120^{-1}(-t^5+25t^4-200t^3+600t^2-600t+120)
+	\end{aligned}
+$$
+
+
+*	Othonormal basis
+$$\begin{aligned}
+	\varphi_n(t) &= \sqrt{2}L_n(2t)e^{-t}\\
+(n+1)\varphi_{n+1}(t) &= (2n+1-2t)\varphi_n(t)-n\varphi_{n-1}(t).
+	\end{aligned}$$
+	
+$$\begin{aligned}
+&\varphi_0(t) = \sqrt{2}e^{-t}\\
+&\varphi_1(t) = \sqrt{2}(-2t+1)e^{-t}\\
+&\varphi_2(t) = \sqrt{2}2^{-1}(4t^2-8t+2)e^{-t}\\
+&\varphi_3(t) = \sqrt{2}6^{-1}(-8t^3 +36t^2 - 36t + 6)e^{-t}\\
+&\varphi_4(t) = \sqrt{2}24^{-1}(16t^4-128t^3+288t^2-192t+24)e^{-t}\\
+&\varphi_5(t) = \sqrt{2}120^{-1}(-32t^5+400t^4-1600t^3+2400t^2-1200t+120)e^{-t}
+	\end{aligned}
+$$	
+
+
+```{r legendrepoly, include=FALSE}
+lagpol<-function(x = NA, level = 2)
+{
+  mX <- matrix(0, nrow = length(x), ncol = level+1)
+  mX[,1] <- sqrt(2)*exp(-x)
+  if (level >= 1) {
+    mX[,2] <- sqrt(2)*(-2*x+1)*exp(-x)
+  } 
+  if (level > 1) {
+    for (k in 2:level) {
+      mX[,k+1] <- ((2*k-1 -2*x)*mX[,k] - (k-1)*mX[,k-1]) / k
+    }
+  }
+  
+  mX
+}
+```
+```{r basis, echo=FALSE}
+level <- 8
+x <- seq(0,10,length.out=100)
+LaguerreBasis <- lagpol(x, level)
+
+lnames <- expression(p[0])
+for (i in 1:level) {
+  txt = paste0('P[',i,']')
+  lnames <- c(lnames, parse(text = txt))
+}
+
+ltys <- rep(c(1,2,4), each = 3)[1:(level+1)]
+cols <- rep(c(1,2,4), times = level/2+1)[1:(level+1)]
+
+matplot(x, LaguerreBasis, type = 'l', lty = ltys, col = cols, ylab = "", main="Orthonormal Laguerre Basis on the positive real axis")
+legend('topright', legend = lnames, col = cols, lty = ltys, ncol = ceiling(level/2), lwd = 1.5)
+
+```
