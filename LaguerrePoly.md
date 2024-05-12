@@ -1,9 +1,7 @@
-Laguerre Polynomials
-================
-
 $$\begin{aligned}
-(n+1)L_{n+1}(t) = (2n+1-t)L_n(t)-nL_{n-1}(t).
-    \end{aligned}$$ $$\begin{aligned}
+(n+1)L\_{n+1}(t) = (2n+1-t)L_n(t)-nL\_{n-1}(t).
+    \end{aligned}$$
+$$\begin{aligned}
 &L_0(t) = 1\\
 &L_1(t) = -t+1\\
 &L_2(t) = 2^{-1}(t^2-4t+2)\\
@@ -13,13 +11,11 @@ $$\begin{aligned}
     \end{aligned}
 $$
 
-- Othonormal basis
-```math
-\begin{aligned}
-  \varphi_n(t) &= \sqrt{2}L_n(2t)e^{-t}\\
-  (n+1)\varphi_{n+1}(t) &= (2n+1-2t)\varphi_n(t)-n\varphi_{n-1}(t).
-  \end{aligned}
-```
+-   Othonormal basis
+    $$\begin{aligned}
+    \varphi_n(t) &= \sqrt{2}L_n(2t)e^{-t}\\
+    (n+1)\varphi\_{n+1}(t) &= (2n+1-2t)\varphi_n(t)-n\varphi\_{n-1}(t).
+    \end{aligned}$$
 
 $$\begin{aligned}
 &\varphi_0(t) = \sqrt{2}e^{-t}\\
@@ -31,4 +27,4 @@ $$\begin{aligned}
     \end{aligned}
 $$
 
-![](LaguerrePoly_files/figure-gfm/basis-1.png)<!-- -->
+![](LaguerrePoly_files/figure-markdown_github/basis-1.png)
