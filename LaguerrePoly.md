@@ -13,7 +13,8 @@ $$\begin{aligned}
     \end{aligned}
 $$
 
-- Othonormal basis $$\begin{aligned}
+- Othonormal basis
+$$\begin{aligned}
   \varphi_n(t) &= \sqrt{2}L_n(2t)e^{-t}\\
   (n+1)\varphi_{n+1}(t) &= (2n+1-2t)\varphi_n(t)-n\varphi_{n-1}(t).
   \end{aligned}$$
